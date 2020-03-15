@@ -20,5 +20,5 @@ Create a task list (or to-do list),
 
 # How to install and run 
 
-Beack-end: Clone repository and run with spring-boot:run, open ( http://localhost:8080/swagger-ui.html ) to see the documentation
-Front-End: Clone repository run npm install to download all libraries and run npm start.
+- Beack-end: Clone repository and run with spring-boot:run, open ( http://localhost:8080/swagger-ui.html ) to see the documentation
+- Front-End: Clone repository run npm install to download all libraries and run npm start.
