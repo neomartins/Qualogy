@@ -1,11 +1,8 @@
 package org.qualogy.assessment.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.qualogy.assessment.model.Todo;
-import org.qualogy.assessment.repository.TodoRepository;
+import org.qualogy.assessment.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,64 +23,36 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api")
 public class TodoController {
 
-	@Autowired
-	TodoRepository todoRepository;
+     @Autowired
+     TodoService todoService;
 
-	@ApiOperation(value = "Get all todos")
-	@GetMapping("/todoList")
-	public ResponseEntity<List<Todo>> findAllTodo() {
-		try {
-			List<Todo> todoList = new ArrayList<Todo>();
-			todoRepository.findAll().forEach(todoList::add);
-			return new ResponseEntity<>(todoList, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+     @ApiOperation(value = "Get all todos")
+     @GetMapping("/todoList")
+     public ResponseEntity<List<Todo>> findAllTodo() {
+          return this.todoService.findAllTodo();
+     }
 
+     @ApiOperation(value = "Create Todo")
+     @PostMapping("/todoList")
+     public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
+          return this.todoService.createTodo(todo);
+     }
 
-	@ApiOperation(value = "Create Todo")
-	@PostMapping("/todoList")
-	public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) {
-		try {
-			Todo todoData = todoRepository.save(todo);
-			return new ResponseEntity<>(todoData, HttpStatus.CREATED);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-		}
-	}
+     @ApiOperation(value = "Update todo")
+     @PutMapping("/todoList/{id}")
+     public ResponseEntity<Todo> updateTodo(@PathVariable("id") String id, @RequestBody Todo todo) {
+          return this.todoService.updateTodo(id, todo);
+     }
 
-	@ApiOperation(value = "Update todo")
-	@PutMapping("/todoList/{id}")
-	public ResponseEntity<Todo> updateTodo(@PathVariable("id") String id, @RequestBody Todo todo) {
-		Optional<Todo> todoData = todoRepository.findById(id);
+     @ApiOperation(value = "Delete todo by ID")
+     @DeleteMapping("/todoList/{id}")
+     public ResponseEntity<HttpStatus> deleteTodoById(@PathVariable("id") String id) {
+          return this.todoService.deleteTodoById(id);
+     }
 
-		if (todoData.isPresent()) {
-			return new ResponseEntity<>(todoRepository.save(todo), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-
-	@ApiOperation(value = "Delete todo by ID")
-	@DeleteMapping("/todoList/{id}")
-	public ResponseEntity<HttpStatus> deleteTodoById(@PathVariable("id") String id) {
-		try {
-			todoRepository.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}
-	}
-
-	@ApiOperation(value = "Delete all todos")
-	@DeleteMapping("/todoList")
-	public ResponseEntity<HttpStatus> deleteAllTodos() {
-		try {
-			todoRepository.deleteAll();
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}
-	}
+     @ApiOperation(value = "Delete all todos")
+     @DeleteMapping("/todoList")
+     public ResponseEntity<HttpStatus> deleteAllTodos() {
+          return this.todoService.deleteAllTodos();
+     }
 }

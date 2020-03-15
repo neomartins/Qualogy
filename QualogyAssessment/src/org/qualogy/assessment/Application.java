@@ -15,21 +15,21 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+     public static void main(String[] args) {
+          SpringApplication.run(Application.class, args);
+     }
 
-	@Bean
-	public Docket productApi() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("org.qualogy.assessment")).build().apiInfo(metaData());
+     @Bean
+     public Docket productApi() {
+          return new Docket(DocumentationType.SWAGGER_2).select()
+                    .apis(RequestHandlerSelectors.basePackage("org.qualogy.assessment")).build().apiInfo(metaData());
 
-	}
+     }
 
-	private ApiInfo metaData() {
-		return new ApiInfoBuilder().title("Spring Boot REST API")
-				.description("\"Spring Boot REST API for greeting todo list\"").version("1.0.0")
-				.license("Apache License Version 2.0").licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
-				.build();
-	}
+     private ApiInfo metaData() {
+          return new ApiInfoBuilder().title("Spring Boot REST API")
+                    .description("\"Spring Boot REST API for greeting todo list\"").version("1.0.0")
+                    .license("Apache License Version 2.0").licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
+                    .build();
+     }
 }
