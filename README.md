@@ -7,7 +7,7 @@ Create a task list (or to-do list),
 - Change the description of a task.
 - The state of the tasks and the task list should be stored and should be still available after restarting the application.
 
-#Technologies used in this project
+# Technologies used in this project
 - Java 8
 - Spring
 - MongoDB
@@ -18,7 +18,7 @@ Create a task list (or to-do list),
 - Maven
 - Node.js
 
-#How to install and run 
+# How to install and run 
 
-Beack-end: Clone repository and run with spring-boot:run, open ( http://localhost:8080/swagger-ui.html ) to see the documentation
-Front-End: Clone repository run npm install to download all libraries and run npm start.
+- Beack-end: Clone repository and run with spring-boot:run, open ( http://localhost:8080/swagger-ui.html ) to see the documentation
+- Front-End: Clone repository run npm install to download all libraries and run npm start.
